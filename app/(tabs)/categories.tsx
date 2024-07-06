@@ -5,7 +5,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView'
 import useCategories from '@/hooks/categories/useCategories'
 import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
-
+import { BASE_URL } from '@env'
 export default function CategoriesScreen() {
   const { data: categories, isLoading, isError } = useCategories()
 
@@ -26,12 +26,12 @@ export default function CategoriesScreen() {
       }>
       <ThemedView style={styles.container}>
         {categories?.map((category) => (
-          <ThemedView key={category.id} style={styles.pizzaContainer}>
+          <ThemedView key={category.id} style={styles.container}>
             <Image
               source={{
-                uri: `https://mypizza-api.ihor88.click/images/400_${category.image}`,
+                uri: `${BASE_URL}images/200_${category.image}`,
               }}
-              style={styles.image}
+              style={styles.categoryImage}
             />
             <ThemedText style={styles.title}>{category.name}</ThemedText>
           </ThemedView>
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 5,
+    backgroundColor: 'blue',
   },
   image: {
     width: 200,
@@ -76,5 +77,12 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  categoryImage: {
+    width: 200,
+    height: 200,
+    resizeMode: 'cover',
+    borderRadius: 5,
+    marginBottom: 10,
   },
 })
