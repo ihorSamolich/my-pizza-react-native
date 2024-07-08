@@ -2,6 +2,8 @@ import React from 'react'
 import { View, Image, Text, StyleSheet } from 'react-native'
 import { BASE_URL } from '@env'
 import { ICategory } from '@/interfaces/category'
+import { Link } from 'expo-router'
+import { ThemedView } from '@/components/ThemedView'
 
 interface CategoryItemProps {
   category: ICategory
@@ -13,9 +15,11 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
         source={{ uri: `${BASE_URL}images/200_${category.image}` }}
         style={styles.categoryImage}
       />
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{category.name}</Text>
-      </View>
+      <ThemedView style={styles.textContainer}>
+        <Link href={`/category/${category.id}`} style={styles.title}>
+          {category.name}
+        </Link>
+      </ThemedView>
     </View>
   )
 }

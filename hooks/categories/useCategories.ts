@@ -5,7 +5,7 @@ import { BASE_URL } from '@env'
 
 const useCategories = (): UseQueryResult<ICategory[], Error> => {
   return useQuery('categories', async () => {
-    const response = await axios.get(`${BASE_URL}/api/categories/getAll`)
+    const response = await axios.get(`${BASE_URL}api/categories/getAll`)
     return response.data as ICategory[]
   })
 }
