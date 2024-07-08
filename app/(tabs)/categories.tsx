@@ -5,7 +5,8 @@ import ParallaxScrollView from '@/components/ParallaxScrollView'
 import useCategories from '@/hooks/categories/useCategories'
 import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
-import { BASE_URL } from '@env'
+import CategoryItem from '@/components/category/CategoryItem'
+import { ICategory } from '@/interfaces/category'
 export default function CategoriesScreen() {
   const { data: categories, isLoading, isError } = useCategories()
 
@@ -21,20 +22,16 @@ export default function CategoriesScreen() {
           source={{
             uri: 'https://assets.caseys.com/m/74a6af2ca66142c3/original/Specialty-Pizza-Category-Banner.jpg',
           }}
-          style={styles.reactLogo}
+          style={styles.screenLogo}
         />
       }>
       <ThemedView style={styles.container}>
-        {categories?.map((category) => (
-          <ThemedView key={category.id} style={styles.container}>
-            <Image
-              source={{
-                uri: `${BASE_URL}images/200_${category.image}`,
-              }}
-              style={styles.categoryImage}
-            />
-            <ThemedText style={styles.title}>{category.name}</ThemedText>
-          </ThemedView>
+        <ThemedView style={styles.headerContainer}>
+          <ThemedText style={styles.title}>Обрати категорію</ThemedText>
+        </ThemedView>
+
+        {categories?.map((category: ICategory) => (
+          <CategoryItem key={category.id} category={category} />
         ))}
       </ThemedView>
     </ParallaxScrollView>
@@ -46,43 +43,24 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'transparent',
   },
-  pizzaContainer: {
-    marginBottom: 20,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    backgroundColor: 'blue',
-  },
-  image: {
-    width: 200,
-    height: 200,
-    resizeMode: 'cover',
-    borderRadius: 5,
-    marginBottom: 10,
-  },
+
   title: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 5,
   },
-  description: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  reactLogo: {
+
+  screenLogo: {
     height: '100%',
     width: '100%',
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
   },
-  categoryImage: {
-    width: 200,
-    height: 200,
-    resizeMode: 'cover',
-    borderRadius: 5,
-    marginBottom: 10,
+
+  headerContainer: {
+    backgroundColor: '#f3ff00',
+    marginBottom: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    transform: [{ rotate: '-5deg' }],
   },
 })

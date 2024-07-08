@@ -26,25 +26,14 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Експлор',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? 'code-slash' : 'code-slash-outline'}
-              color={color}
-            />
-          ),
-        }}
-      />
+
       <Tabs.Screen
         name="categories"
         options={{
-          title: 'Піцци',
+          title: 'Категорії',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? 'code-slash' : 'code-slash-outline'}
+              name={focused ? 'menu' : 'menu-outline'}
               color={color}
             />
           ),
