@@ -1,5 +1,5 @@
 import type { PropsWithChildren, ReactElement } from 'react'
-import { StyleSheet, useColorScheme } from 'react-native'
+import { Dimensions, StyleSheet, useColorScheme } from 'react-native'
 import Animated, {
   interpolate,
   useAnimatedRef,
@@ -10,6 +10,8 @@ import Animated, {
 import { ThemedView } from '@/components/ThemedView'
 
 const HEADER_HEIGHT = 250
+
+const { height: screenHeight } = Dimensions.get('window')
 
 type Props = PropsWithChildren<{
   headerImage?: ReactElement
@@ -72,9 +74,10 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   content: {
-    backgroundColor: 'rgb(248,160,87)',
+    backgroundColor: 'rgb(255,144,51)',
     flex: 1,
     padding: 32,
+    minHeight: screenHeight - HEADER_HEIGHT,
     gap: 16,
     overflow: 'hidden',
   },

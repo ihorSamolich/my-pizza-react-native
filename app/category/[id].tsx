@@ -1,12 +1,10 @@
 import ParallaxScrollView from '@/components/ParallaxScrollView'
 import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
 import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
 import { useLocalSearchParams } from 'expo-router'
 import usePizzasByCategory from '@/hooks/pizza/usePizzasByCategory'
-import { ICategory } from '@/interfaces/category'
-import CategoryCard from '@/components/category/CategoryCard'
 import { IPizza } from '@/interfaces/pizza'
 import PizzaCard from '@/components/pizza/PizzaCard'
 
@@ -46,7 +44,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: 'transparent',
   },
 })
