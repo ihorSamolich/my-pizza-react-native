@@ -10,7 +10,7 @@ const usePizzasByCategory = (
     const response = await axios.get(
       `${BASE_URL}api/Pizza/GetPage?CategoryId=${categoryId}`,
     )
-    return response.data as IPizza[]
+    return response.data.data as IPizza[]
   })
 }
 

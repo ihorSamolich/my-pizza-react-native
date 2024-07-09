@@ -8,7 +8,7 @@ import { ThemedView } from '@/components/ThemedView'
 interface CategoryItemProps {
   category: ICategory
 }
-const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
+const CategoryCard: React.FC<CategoryItemProps> = ({ category }) => {
   return (
     <View style={styles.container}>
       <Image
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 })
-export default CategoryItem
+export default CategoryCard

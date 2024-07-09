@@ -5,15 +5,10 @@ import ParallaxScrollView from '@/components/ParallaxScrollView'
 import useCategories from '@/hooks/categories/useCategories'
 import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
-import CategoryItem from '@/components/category/CategoryItem'
+import CategoryCard from '@/components/category/CategoryCard'
 import { ICategory } from '@/interfaces/category'
-import usePizzasByCategory from '@/hooks/pizza/usePizzasByCategory'
 export default function CategoriesScreen() {
   const { data: categories, isLoading, isError, error } = useCategories()
-
-  const { data: pizzas } = usePizzasByCategory(1)
-
-  console.log(pizzas)
 
   if (isLoading) return <ThemedText>Loading...</ThemedText>
   if (isError) return <ThemedText>Error</ThemedText>
@@ -34,9 +29,8 @@ export default function CategoriesScreen() {
         <ThemedView style={styles.headerContainer}>
           <ThemedText style={styles.title}>Обрати категорію</ThemedText>
         </ThemedView>
-
         {categories?.map((category: ICategory) => (
-          <CategoryItem key={category.id} category={category} />
+          <CategoryCard key={category.id} category={category} />
         ))}
       </ThemedView>
     </ParallaxScrollView>

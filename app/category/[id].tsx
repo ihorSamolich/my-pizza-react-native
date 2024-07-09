@@ -3,8 +3,21 @@ import React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
+import { useLocalSearchParams } from 'expo-router'
+import usePizzasByCategory from '@/hooks/pizza/usePizzasByCategory'
+import { ICategory } from '@/interfaces/category'
+import CategoryCard from '@/components/category/CategoryCard'
+import { IPizza } from '@/interfaces/pizza'
+import PizzaCard from '@/components/pizza/PizzaCard'
 
 const CategoryScreen = () => {
+  const { id } = useLocalSearchParams()
+
+  const { data: pizzas, isLoading, isError } = usePizzasByCategory(Number(id))
+
+  if (isLoading) return <ThemedText>Loading...</ThemedText>
+  if (isError) return <ThemedText>Error</ThemedText>
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -18,7 +31,9 @@ const CategoryScreen = () => {
         />
       }>
       <ThemedView style={styles.container}>
-        <ThemedText>Category ID page</ThemedText>
+        {pizzas?.map((pizza: IPizza) => (
+          <PizzaCard key={pizza.id} pizza={pizza} />
+        ))}
       </ThemedView>
     </ParallaxScrollView>
   )
