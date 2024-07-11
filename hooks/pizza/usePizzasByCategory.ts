@@ -8,7 +8,7 @@ const usePizzasByCategory = (
 ): UseQueryResult<IPizza[], Error> => {
   return useQuery('pizzas', async () => {
     const response = await axios.get(
-      `${BASE_URL}api/Pizza/GetPage?CategoryId=${categoryId}`,
+      `http://10.0.2.2:5174/api/Pizza/GetPage?CategoryId=${categoryId}`,
     )
     return response.data.data as IPizza[]
   })

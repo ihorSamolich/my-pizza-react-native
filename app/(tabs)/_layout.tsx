@@ -39,6 +39,19 @@ export default function TabLayout() {
           ),
         }}
       />
+
+      <Tabs.Screen
+        name="login"
+        options={{
+          title: 'Реєстрація',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? 'menu' : 'menu-outline'}
+              color={color}
+            />
+          ),
+        }}
+      />
     </Tabs>
   )
 }

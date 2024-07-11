@@ -29,9 +29,15 @@ const CategoryScreen = () => {
         />
       }>
       <ThemedView style={styles.container}>
-        {pizzas?.map((pizza: IPizza) => (
-          <PizzaCard key={pizza.id} pizza={pizza} />
-        ))}
+        {pizzas?.length === 0 ? (
+          <ThemedText style={styles.noResultsText}>
+            Записів не знайдено
+          </ThemedText>
+        ) : (
+          pizzas?.map((pizza: IPizza) => (
+            <PizzaCard key={pizza.id} pizza={pizza} />
+          ))
+        )}
       </ThemedView>
     </ParallaxScrollView>
   )
@@ -45,6 +51,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: 'transparent',
+  },
+  noResultsText: {
+    padding: 20,
+    backgroundColor: '#a4a4a4',
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
   },
 })
 
