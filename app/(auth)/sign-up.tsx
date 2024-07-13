@@ -10,12 +10,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import { images } from '@/constants'
 import FormField from '@/components/FormField'
-import CustomButton from '@/components/CustomButton'
-import { Link } from 'expo-router'
-import Ionicons from '@expo/vector-icons/Ionicons'
+
+import { useRegisterMutation } from '@/services/accountService'
 import { getFileFromUri } from '@/utils/getFileFromUri'
+import { Link, router } from 'expo-router'
+import CustomButton from '@/components/CustomButton'
+import { images } from '@/constants'
+import Ionicons from '@expo/vector-icons/Ionicons'
 
 const SignUp = () => {
   const [firstName, setFirstName] = React.useState('')
@@ -23,6 +25,8 @@ const SignUp = () => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [image, setImage] = useState<string | null>(null)
+
+  const [create] = useRegisterMutation()
 
   const pickImage = async () => {
     const permissionResult =
@@ -46,39 +50,26 @@ const SignUp = () => {
   }
 
   const submit = async () => {
-    if (image) {
-      const file = await getFileFromUri(image)
+    try {
+      if (image) {
+        const file = await getFileFromUri(image)
 
-      if (file) {
-        const formData = new FormData()
-        formData.append('firstName', firstName)
-        formData.append('lastName', lastName)
-        formData.append('userName', email)
-        formData.append('email', email)
-        formData.append('password', password)
-        // @ts-ignore
-        formData.append('image', file)
-
-        try {
-          const response = await fetch(
-            'https://mypizza-api.ihor88.click/api/Accounts/Registration',
-            {
-              method: 'POST',
-              body: formData,
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-            },
-          )
-
-          const result = await response.json()
-          alert('Upload successful! ' + JSON.stringify(result))
-        } catch (error) {
-          console.error('Error uploading file:', error)
-        }
+        const res = await create({
+          firstName,
+          lastName,
+          email,
+          password,
+          // @ts-ignore
+          image: file,
+        }).unwrap()
       }
-    } else {
-      alert(`${firstName} ${lastName} ${email} ${password}`)
+
+      alert('Successful!')
+      router.replace('/login')
+    } catch (error) {
+      console.log(error)
+
+      alert('Error')
     }
   }
 
@@ -127,6 +118,7 @@ const SignUp = () => {
             value={email}
             handleChangeText={(e) => setEmail(e)}
             otherStyles="mt-7"
+            keyboardType="email-address"
           />
 
           <FormField
