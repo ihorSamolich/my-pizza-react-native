@@ -1,5 +1,10 @@
 import type { PropsWithChildren, ReactElement } from 'react'
-import { Dimensions, StyleSheet, useColorScheme } from 'react-native'
+import {
+  Dimensions,
+  SafeAreaView,
+  StyleSheet,
+  useColorScheme,
+} from 'react-native'
 import Animated, {
   interpolate,
   useAnimatedRef,

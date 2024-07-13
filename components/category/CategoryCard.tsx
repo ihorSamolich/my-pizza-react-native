@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, Image, Text, StyleSheet } from 'react-native'
-import { BASE_URL } from '@env'
 import { ICategory } from '@/interfaces/category'
 import { Link } from 'expo-router'
 import { ThemedView } from '@/components/ThemedView'
+import { BASE_URL } from '@/constants/Urls'
 
 interface CategoryItemProps {
   category: ICategory

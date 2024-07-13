@@ -1,10 +1,9 @@
 import React from 'react'
 import { View, Image, Text, StyleSheet } from 'react-native'
-import { BASE_URL } from '@env'
 import { IPizza } from '@/interfaces/pizza'
 import { Link } from 'expo-router'
-import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
+import { BASE_URL } from '@/constants/Urls'
 
 interface PizzaCardProps {
   pizza: IPizza

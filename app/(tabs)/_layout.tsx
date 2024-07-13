@@ -11,7 +11,13 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: '#ffa001',
+        tabBarInactiveTintColor: '#cdcde0',
+        tabBarStyle: {
+          backgroundColor: '#161622',
+          borderTopColor: '#232533',
+          borderTopWidth: 1,
+        },
         headerShown: false,
       }}>
       <Tabs.Screen
@@ -30,10 +36,10 @@ export default function TabLayout() {
       <Tabs.Screen
         name="categories"
         options={{
-          title: 'Категорії',
+          title: 'Піца',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? 'menu' : 'menu-outline'}
+              name={focused ? 'pizza' : 'pizza-outline'}
               color={color}
             />
           ),
@@ -46,12 +52,40 @@ export default function TabLayout() {
           title: 'Реєстрація',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? 'menu' : 'menu-outline'}
+              name={focused ? 'person' : 'person-outline'}
               color={color}
             />
           ),
         }}
       />
+
+      {/*{login ? (*/}
+      {/*  <Tabs.Screen*/}
+      {/*    name="login"*/}
+      {/*    options={{*/}
+      {/*      title: 'Реєстрація',*/}
+      {/*      tabBarIcon: ({ color, focused }) => (*/}
+      {/*        <TabBarIcon*/}
+      {/*          name={focused ? 'person' : 'person-outline'}*/}
+      {/*          color={color}*/}
+      {/*        />*/}
+      {/*      ),*/}
+      {/*    }}*/}
+      {/*  />*/}
+      {/*) : (*/}
+      {/*  <Tabs.Screen*/}
+      {/*    name="login"*/}
+      {/*    options={{*/}
+      {/*      title: 'Аккаунт',*/}
+      {/*      tabBarIcon: ({ color, focused }) => (*/}
+      {/*        <TabBarIcon*/}
+      {/*          name={focused ? 'person' : 'person-outline'}*/}
+      {/*          color={color}*/}
+      {/*        />*/}
+      {/*      ),*/}
+      {/*    }}*/}
+      {/*  />*/}
+      {/*)}*/}
     </Tabs>
   )
 }
