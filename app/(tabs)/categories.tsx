@@ -2,16 +2,15 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 
 import React from 'react'
 import ParallaxScrollView from '@/components/ParallaxScrollView'
-import useCategories from '@/hooks/categories/useCategories'
 import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
 import CategoryCard from '@/components/category/CategoryCard'
 import { ICategory } from '@/interfaces/category'
+import { useGetAllCategoriesQuery } from '@/services/categoryService'
 export default function CategoriesScreen() {
-  const { data: categories, isLoading, isError, error } = useCategories()
+  const { data: categories, isLoading } = useGetAllCategoriesQuery()
 
   if (isLoading) return <ThemedText>Loading...</ThemedText>
-  if (isError) return <ThemedText>Error</ThemedText>
 
   return (
     <ParallaxScrollView

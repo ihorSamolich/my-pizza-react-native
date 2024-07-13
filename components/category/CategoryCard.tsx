@@ -12,7 +12,7 @@ const CategoryCard: React.FC<CategoryItemProps> = ({ category }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: `${BASE_URL}images/200_${category.image}` }}
+        source={{ uri: `${BASE_URL}/images/200_${category.image}` }}
         style={styles.categoryImage}
       />
       <ThemedView style={styles.textContainer}>

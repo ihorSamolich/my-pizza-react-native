@@ -14,7 +14,7 @@ const PizzaCard: React.FC<PizzaCardProps> = ({ pizza }) => {
   return (
     <View style={styles.card}>
       <Image
-        source={{ uri: `${BASE_URL}images/200_${pizza.photos[0].name}` }}
+        source={{ uri: `${BASE_URL}/images/200_${pizza.photos[0].name}` }}
         style={styles.image}
       />
       <View style={styles.infoContainer}>

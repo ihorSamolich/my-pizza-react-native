@@ -4,18 +4,19 @@ import { Image, StyleSheet } from 'react-native'
 import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
 import { useLocalSearchParams } from 'expo-router'
-import usePizzasByCategory from '@/hooks/pizza/usePizzasByCategory'
-import { IPizza } from '@/interfaces/pizza'
+import {
+  useGetAllPizzasQuery,
+  useGetPizzasByCategoryQuery,
+} from '@/services/pizzaService'
 import PizzaCard from '@/components/pizza/PizzaCard'
+import { IPizza } from '@/interfaces/pizza'
 
 const CategoryScreen = () => {
   const { id } = useLocalSearchParams()
 
-  const { data: pizzas, isLoading, isError } = usePizzasByCategory(Number(id))
+  const { data, isLoading } = useGetPizzasByCategoryQuery(Number(id))
 
   if (isLoading) return <ThemedText>Loading...</ThemedText>
-  if (isError) return <ThemedText>Error</ThemedText>
-
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -29,12 +30,12 @@ const CategoryScreen = () => {
         />
       }>
       <ThemedView style={styles.container}>
-        {pizzas?.length === 0 ? (
+        {data?.data.length === 0 ? (
           <ThemedText style={styles.noResultsText}>
             Записів не знайдено
           </ThemedText>
         ) : (
-          pizzas?.map((pizza: IPizza) => (
+          data?.data.map((pizza: IPizza) => (
             <PizzaCard key={pizza.id} pizza={pizza} />
           ))
         )}

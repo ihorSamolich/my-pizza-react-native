@@ -10,35 +10,17 @@ import {
 
 import React, { useState } from 'react'
 import ParallaxScrollView from '@/components/ParallaxScrollView'
-import useCategories from '@/hooks/categories/useCategories'
 import { ThemedView } from '@/components/ThemedView'
 import { ThemedText } from '@/components/ThemedText'
-import CategoryCard from '@/components/category/CategoryCard'
-import { ICategory } from '@/interfaces/category'
-import useCreateUser from '@/hooks/account/useCreateUser'
+
 export default function LoginScreen() {
   const [firstName, onChangeFirstName] = React.useState('')
   const [lastName, onChangeLastName] = React.useState('')
   const [email, onChangeEmail] = React.useState('')
   const [password, onChangePassword] = React.useState('')
   const [image, setImage] = useState<File | null>(null)
-  const createUserMutation = useCreateUser()
 
-  const handleCreateUser = async () => {
-    try {
-      await createUserMutation.mutateAsync({
-        firstName,
-        lastName,
-        email,
-        password,
-        image,
-      })
-      Alert.alert('User created successfully!')
-    } catch (error) {
-      console.log(error.message)
-      Alert.alert('Error creating user', error)
-    }
-  }
+  const handleCreateUser = async () => {}
 
   return (
     <ParallaxScrollView
