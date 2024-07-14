@@ -5,10 +5,12 @@ import { categoryApi } from '@/services/categoryService'
 import { pizzaApi } from '@/services/pizzaService'
 import { accountApi } from '@/services/accountService'
 import userReducer from './slices/userSlice'
+import pizzaReducer from './slices/basketSlice'
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
+    pizza: pizzaReducer,
     [accountApi.reducerPath]: accountApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [pizzaApi.reducerPath]: pizzaApi.reducer,

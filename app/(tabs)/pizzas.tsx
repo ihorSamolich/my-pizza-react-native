@@ -48,9 +48,9 @@ export default function CategoriesScreen() {
       {pizzas && (
         <View>
           <FlatList
-            data={pizzas?.data}
+            data={[...pizzas.data].sort((a, b) => Number(b.isAvailable) - Number(a.isAvailable))}
             keyExtractor={(item) => item.id.toString()}
-            contentContainerStyle={{ gap: 10, paddingBottom: 180 }}
+            contentContainerStyle={{ gap: 10, paddingBottom: 200 }}
             columnWrapperStyle={{ justifyContent: 'space-between' }}
             showsVerticalScrollIndicator={false}
             numColumns={2}

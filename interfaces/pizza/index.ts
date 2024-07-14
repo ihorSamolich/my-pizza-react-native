@@ -10,6 +10,12 @@ export interface IPizza {
   category: ICategory
   photos: IPhoto[]
   // ingredients: IIngredient[]
-  // sizes: IPizzaSize[]
-  // dateCreated: string
+  sizes: IPizzaSize[]
+}
+
+export interface IPizzaSize {
+  id: number
+  sizeId: number
+  sizeName: string
+  price: number
 }

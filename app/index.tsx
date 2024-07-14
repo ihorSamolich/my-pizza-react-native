@@ -18,7 +18,7 @@ const Welcome = () => {
       .then((res) => {
         if (res) {
           dispatch(setCredentials({ user: jwtParse(res) as IUser, token: res }))
-          router.push('/pizzas')
+          router.replace('/pizzas')
         }
       })
       .catch((error) => {
