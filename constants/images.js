@@ -7,7 +7,10 @@ import logoSmall from '../assets/images/logo-small.png'
 import empty from '../assets/images/empty.png'
 import pizzaLogo from '../assets/images/pizza_logo.png'
 import pizzaWelcome from '../assets/images/pizza_welcome.png'
+import pizzaBasket from '../assets/images/pizza_basket.png'
+import pizzaBg from '../assets/images/pizza_bg.jpg'
 export default {
+  pizzaBg,
   profile,
   thumbnail,
   cards,
@@ -17,4 +20,5 @@ export default {
   empty,
   pizzaLogo,
   pizzaWelcome,
+  pizzaBasket,
 }

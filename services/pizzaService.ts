@@ -28,8 +28,4 @@ export const pizzaApi = createApi({
   }),
 })
 
-export const {
-  useGetAllPizzasQuery,
-  useGetPizzaByIdQuery,
-  useGetPizzasByCategoryQuery,
-} = pizzaApi
+export const { useGetAllPizzasQuery, useGetPizzaByIdQuery, useGetPizzasByCategoryQuery } = pizzaApi

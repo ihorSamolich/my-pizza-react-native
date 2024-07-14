@@ -1,15 +1,7 @@
 import React, { useState } from 'react'
 import * as ImagePicker from 'expo-image-picker'
 
-import {
-  Dimensions,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import { Dimensions, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import FormField from '@/components/FormField'
 
 import { useRegisterMutation } from '@/services/accountService'
@@ -26,11 +18,10 @@ const SignUp = () => {
   const [password, setPassword] = React.useState('')
   const [image, setImage] = useState<string | null>(null)
 
-  const [create] = useRegisterMutation()
+  const [create, { isLoading }] = useRegisterMutation()
 
   const pickImage = async () => {
-    const permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync()
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync()
 
     if (!permissionResult.granted) {
       alert('Permission to access gallery is required!')
@@ -65,7 +56,7 @@ const SignUp = () => {
       }
 
       alert('Successful!')
-      router.replace('/login')
+      router.replace('/pizzas')
     } catch (error) {
       console.log(error)
 
@@ -82,19 +73,11 @@ const SignUp = () => {
             minHeight: Dimensions.get('window').height - 100,
           }}>
           <View className="flex flex-row items-center justify-center">
-            <Image
-              source={images.pizzaLogo}
-              className=" w-[40px] h-[34px]"
-              resizeMode="contain"
-            />
-            <Text className="mt-2 text-4xl font-pbold font-bold text-secondary">
-              MYPIZZA
-            </Text>
+            <Image source={images.pizzaLogo} className=" w-[40px] h-[34px]" resizeMode="contain" />
+            <Text className="mt-2 text-4xl font-pbold font-bold text-secondary">MYPIZZA</Text>
           </View>
 
-          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">
-            Sign Up to My Pizza
-          </Text>
+          <Text className="text-2xl font-semibold text-white mt-10 font-psemibold">Sign Up to My Pizza</Text>
 
           <FormField
             placeholder="Enter your first name"
@@ -130,40 +113,24 @@ const SignUp = () => {
           />
 
           <View className="space-y-2 w-full">
-            <TouchableOpacity
-              onPress={pickImage}
-              className="mt-4 p-4 bg-secondary rounded-xl">
+            <TouchableOpacity onPress={pickImage} className="mt-4 p-4 bg-gray-100 rounded-xl">
               <View className="flex flex-row items-center justify-center gap-2">
-                <Text className="text-center text-white font-psemibold">
-                  Pick an Image
-                </Text>
+                <Text className="text-center text-white font-psemibold">Pick an Image</Text>
                 <Ionicons name="image" size={24} color="white" />
               </View>
             </TouchableOpacity>
             {image && (
               <View className="w-full flex justify-center items-center">
-                <Image
-                  source={{ uri: image }}
-                  className="w-40 h-40 rounded-full"
-                />
+                <Image source={{ uri: image }} className="w-40 h-40 rounded-full" />
               </View>
             )}
           </View>
 
-          <CustomButton
-            title="Sign In"
-            handlePress={submit}
-            containerStyles="mt-7 w-full"
-            // isLoading={isSubmitting}
-          />
+          <CustomButton title="Sign In" handlePress={submit} containerStyles="mt-7 w-full" isLoading={isLoading} />
 
           <View className="flex justify-center pt-5 flex-row gap-2">
-            <Text className="text-lg text-gray-100 font-pregular">
-              Have an account already?
-            </Text>
-            <Link
-              href="/sign-in"
-              className="text-lg font-psemibold text-secondary">
+            <Text className="text-sm text-gray-100 font-pregular">Have an account already?</Text>
+            <Link href="/sign-in" className="text-sm font-psemibold text-secondary">
               Login
             </Link>
           </View>

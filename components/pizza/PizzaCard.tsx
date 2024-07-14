@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, Text, StyleSheet } from 'react-native'
+import { View, Image, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native'
 import { IPizza } from '@/interfaces/pizza'
 import { Link } from 'expo-router'
 import { ThemedText } from '@/components/ThemedText'
@@ -11,70 +11,18 @@ interface PizzaCardProps {
 
 const PizzaCard: React.FC<PizzaCardProps> = ({ pizza }) => {
   return (
-    <View style={styles.card}>
-      <Image
-        source={{ uri: `${BASE_URL}/images/200_${pizza.photos[0].name}` }}
-        style={styles.image}
-      />
-      <View style={styles.infoContainer}>
-        <Link href={`/pizza/${pizza.id}`} style={styles.title}>
-          {pizza.name}
-        </Link>
-
-        <ThemedText style={styles.price}>${100}</ThemedText>
-        <ThemedText style={styles.availability}>
-          {pizza.isAvailable ? 'Available' : 'Not Available'}
-        </ThemedText>
-      </View>
+    <View className="flex flex-1 bg-white rounded-md p-2 items-center shadow-sm shadow-white relative">
+      <Image source={{ uri: `${BASE_URL}/images/200_${pizza.photos[0].name}` }} className="w-24 h-24 rounded-full mb-2" />
+      <Text className="text-red-600 font-bold">$100</Text>
+      <Text className="text-lg font-semibold mb-1">{pizza.name}</Text>
+      <Text numberOfLines={2} ellipsizeMode="tail" className="flex-1 text-gray-500 text-xs text-center mb-4">
+        {pizza.description}
+      </Text>
+      <TouchableOpacity activeOpacity={0.9} className="bg-secondary rounded-full px-10 py-1 absolute -bottom-3">
+        <Text className="text-center text-white font-bold">Add</Text>
+      </TouchableOpacity>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  card: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    marginVertical: 5,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 2,
-  },
-  image: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-  },
-  infoContainer: {
-    flex: 1,
-    marginLeft: 10,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  description: {
-    fontSize: 14,
-    color: '#666',
-  },
-  rating: {
-    fontSize: 14,
-    color: '#666',
-  },
-  price: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  availability: {
-    fontSize: 14,
-    color: '#666',
-  },
-})
 
 export default PizzaCard

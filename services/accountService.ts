@@ -22,7 +22,6 @@ export const accountApi = createApi({
     register: builder.mutation<ILoginResponse, IUserCreate>({
       query: (data) => {
         const formData = generateUserCreateFormData(data)
-
         return {
           url: 'Registration',
           method: 'POST',

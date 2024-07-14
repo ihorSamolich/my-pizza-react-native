@@ -6,8 +6,6 @@ import { Colors } from '@/constants/Colors'
 import { useColorScheme } from '@/hooks/useColorScheme'
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme()
-
   return (
     <Tabs
       screenOptions={{
@@ -21,71 +19,28 @@ export default function TabLayout() {
         headerShown: false,
       }}>
       <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Головна',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? 'home' : 'home-outline'}
-              color={color}
-            />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="categories"
+        name="pizzas"
         options={{
           title: 'Піца',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? 'pizza' : 'pizza-outline'}
-              color={color}
-            />
-          ),
+          tabBarIcon: ({ color, focused }) => <TabBarIcon name={focused ? 'pizza' : 'pizza-outline'} color={color} />,
         }}
       />
 
       <Tabs.Screen
-        name="login"
+        name="basket"
         options={{
-          title: 'Реєстрація',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? 'person' : 'person-outline'}
-              color={color}
-            />
-          ),
+          title: 'Кошик',
+          tabBarIcon: ({ color, focused }) => <TabBarIcon name={focused ? 'basket' : 'basket-outline'} color={color} />,
         }}
       />
 
-      {/*{login ? (*/}
-      {/*  <Tabs.Screen*/}
-      {/*    name="login"*/}
-      {/*    options={{*/}
-      {/*      title: 'Реєстрація',*/}
-      {/*      tabBarIcon: ({ color, focused }) => (*/}
-      {/*        <TabBarIcon*/}
-      {/*          name={focused ? 'person' : 'person-outline'}*/}
-      {/*          color={color}*/}
-      {/*        />*/}
-      {/*      ),*/}
-      {/*    }}*/}
-      {/*  />*/}
-      {/*) : (*/}
-      {/*  <Tabs.Screen*/}
-      {/*    name="login"*/}
-      {/*    options={{*/}
-      {/*      title: 'Аккаунт',*/}
-      {/*      tabBarIcon: ({ color, focused }) => (*/}
-      {/*        <TabBarIcon*/}
-      {/*          name={focused ? 'person' : 'person-outline'}*/}
-      {/*          color={color}*/}
-      {/*        />*/}
-      {/*      ),*/}
-      {/*    }}*/}
-      {/*  />*/}
-      {/*)}*/}
+      <Tabs.Screen
+        name="user"
+        options={{
+          title: 'Профіль',
+          tabBarIcon: ({ color, focused }) => <TabBarIcon name={focused ? 'person' : 'person-outline'} color={color} />,
+        }}
+      />
     </Tabs>
   )
 }
