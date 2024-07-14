@@ -1,10 +1,6 @@
-import { Animated, Dimensions, Image, Text, View } from 'react-native'
-
+import { Animated, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-
 import { useGetAllCategoriesQuery } from '@/services/categoryService'
-import { images } from '@/constants'
-
 import { StatusBar } from 'expo-status-bar'
 import { useGetPizzasByCategoryQuery } from '@/services/pizzaService'
 import PizzaCard from '@/components/pizza/PizzaCard'
@@ -14,6 +10,8 @@ import { ICategory } from '@/interfaces/category'
 import EmptyState from '@/components/EmptyState'
 import BasketButton from '@/components/BasketButton'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import AppLogo from '@/components/AppLogo'
+import SearchInput from '@/components/SearchInput'
 
 export default function CategoriesScreen() {
   const [indexActive, setIndexActive] = useState<number>(0)
@@ -24,16 +22,15 @@ export default function CategoriesScreen() {
 
   useEffect(() => {
     if (categories) {
-      setCategoriesWithAll([{ id: 0, name: 'All', image: 'default.png' }, ...categories])
+      setCategoriesWithAll([{ id: 0, name: 'Всі піци', image: 'default.png' }, ...categories])
     }
   }, [categories])
 
   return (
     <SafeAreaView className="bg-primary flex-1 px-4">
-      <View className="flex flex-row items-center justify-center">
-        <Image source={images.pizzaLogo} className=" w-[60px] h-[60px]" resizeMode="contain" />
-        <Text className="mt-4 text-5xl font-pbold font-bold text-secondary">MYPIZZA</Text>
-      </View>
+      <AppLogo />
+
+      <SearchInput />
 
       {categories && (
         <View>

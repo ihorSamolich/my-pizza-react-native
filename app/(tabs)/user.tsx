@@ -8,6 +8,7 @@ import { removeFromSecureStore } from '@/utils/secureStore'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { getUser, logOut } from '@/redux/slices/userSlice'
 import { BASE_URL } from '@/constants/Urls'
+import AppLogo from '@/components/AppLogo'
 
 export default function UserScreen() {
   const user = useAppSelector(getUser)
@@ -21,6 +22,8 @@ export default function UserScreen() {
 
   return (
     <SafeAreaView className="bg-primary flex-1 px-4">
+      <AppLogo />
+
       <View className="w-full flex justify-center items-center   mb-12 px-4">
         <TouchableOpacity onPress={logout} className="flex w-full items-end mb-10">
           <Image source={icons.logout} resizeMode="contain" className="w-6 h-6" />
