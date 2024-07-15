@@ -2,8 +2,7 @@ import React from 'react'
 import { View, Image, Text, TouchableOpacity } from 'react-native'
 import { IPizza } from '@/interfaces/pizza'
 import { BASE_URL } from '@/constants/Urls'
-import { useAppDispatch } from '@/redux/store'
-import { addToBasket } from '@/redux/slices/basketSlice'
+import { router } from 'expo-router'
 
 interface PizzaCardProps {
   pizza: IPizza
@@ -11,10 +10,9 @@ interface PizzaCardProps {
 
 const PizzaCard: React.FC<PizzaCardProps> = ({ pizza }) => {
   const minPrice = Math.min(...pizza.sizes.map((size) => size.price))
-  const dispatch = useAppDispatch()
 
-  const addPizzaToBasket = () => {
-    dispatch(addToBasket(pizza))
+  const handleSelectPizza = () => {
+    router.push(`/pizza/${pizza.id}`)
   }
 
   return (
@@ -24,14 +22,15 @@ const PizzaCard: React.FC<PizzaCardProps> = ({ pizza }) => {
       <Text className="text-red-600 font-bold">від {minPrice.toFixed()} ₴</Text>
       <Text className="text-lg font-semibold mb-1">{pizza.name}</Text>
       <Text numberOfLines={2} ellipsizeMode="tail" className="flex-1 text-gray-500 text-xs text-center mb-4">
-        {pizza.description}
+        {pizza.ingredients.map((i) => i.name).join(', ')}
       </Text>
+
       <TouchableOpacity
         disabled={!pizza.isAvailable}
-        onPress={addPizzaToBasket}
+        onPress={handleSelectPizza}
         activeOpacity={0.9}
         className="bg-secondary rounded-full px-10 py-1 absolute -bottom-3">
-        <Text className="text-center text-white font-bold">{pizza.isAvailable ? 'Обрати' : 'Відсутня'}</Text>
+        <Text className="text-center text-white font-bold">{pizza.isAvailable ? 'Замовити' : 'Відсутня'}</Text>
       </TouchableOpacity>
     </View>
   )

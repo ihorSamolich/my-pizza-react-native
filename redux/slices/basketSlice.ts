@@ -14,9 +14,13 @@ const pizzaSlice = createSlice({
       const pizza = action.payload
       state.pizzas.push(pizza)
     },
+    removeFromBasket: (state, action: { payload: number }) => {
+      const id = action.payload
+      state.pizzas = state.pizzas.filter((pizza) => pizza.id !== id)
+    },
   },
 })
 
 export const getBasketPizzas = (state: { pizza: IBasketState }) => state.pizza.pizzas
-export const { addToBasket } = pizzaSlice.actions
+export const { addToBasket, removeFromBasket } = pizzaSlice.actions
 export default pizzaSlice.reducer

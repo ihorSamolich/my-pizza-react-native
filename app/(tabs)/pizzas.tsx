@@ -13,7 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import AppLogo from '@/components/AppLogo'
 import SearchInput from '@/components/SearchInput'
 
-export default function CategoriesScreen() {
+export default function PizzasScreen() {
   const [indexActive, setIndexActive] = useState<number>(0)
   const [categoriesWithAll, setCategoriesWithAll] = useState<ICategory[]>([])
 

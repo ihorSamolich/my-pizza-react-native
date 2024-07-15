@@ -7,7 +7,7 @@ const CategoryLayout = () => {
       <Stack.Screen
         name={'[id]'}
         options={{
-          title: 'Категорія',
+          title: 'Піца',
           headerShown: false,
         }}
       />

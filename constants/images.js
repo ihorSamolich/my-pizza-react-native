@@ -9,7 +9,10 @@ import pizzaLogo from '../assets/images/pizza_logo.png'
 import pizzaWelcome from '../assets/images/pizza_welcome.png'
 import pizzaBasket from '../assets/images/pizza_basket.png'
 import pizzaBg from '../assets/images/pizza_bg.jpg'
+import basketcardbg from '../assets/images/basketcargbg.png'
+
 export default {
+  basketcardbg,
   pizzaBg,
   profile,
   thumbnail,
