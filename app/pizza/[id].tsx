@@ -10,6 +10,7 @@ import { BASE_URL } from '@/constants/Urls'
 import CustomButton from '@/components/CustomButton'
 import { useAppDispatch } from '@/redux/store'
 import { addToBasket } from '@/redux/slices/basketSlice'
+import { IPizzaSize } from '@/interfaces/pizza'
 
 const PizzaScreen = () => {
   const { id } = useLocalSearchParams()
@@ -31,7 +32,13 @@ const PizzaScreen = () => {
   }, [pizza])
 
   const addPizzaToBasket = () => {
-    if (pizza) dispatch(addToBasket(pizza))
+    if (pizza) {
+      const pizzaSize: IPizzaSize | undefined = pizza.sizes.find((s) => s.sizeName === size)
+
+      if (pizzaSize) {
+        dispatch(addToBasket({ pizza, size: pizzaSize, quantity: 1 }))
+      }
+    }
     router.back()
   }
 

@@ -1,5 +1,11 @@
-import { IPizza } from '@/interfaces/pizza'
+import { IPizza, IPizzaSize } from '@/interfaces/pizza'
 
 export interface IBasketState {
-  pizzas: IPizza[]
+  pizzas: IBasketPizza[]
+}
+
+export interface IBasketPizza {
+  pizza: IPizza
+  size: IPizzaSize
+  quantity: number
 }
