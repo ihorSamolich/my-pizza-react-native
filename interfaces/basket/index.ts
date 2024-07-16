@@ -9,3 +9,16 @@ export interface IBasketPizza {
   size: IPizzaSize
   quantity: number
 }
+
+export interface IOrderItem {
+  pizzaId: number
+  pizzaSizeId: number
+  quantity: number
+}
+
+export interface IOrder {
+  orderItems: IOrderItem[]
+  deliveryAddress: string
+  isDelivery: boolean
+  token: string | null
+}

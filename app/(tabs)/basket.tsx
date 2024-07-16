@@ -9,10 +9,18 @@ import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { clearBasket, getBasketPizzas } from '@/redux/slices/basketSlice'
 import PizzaBasketCard from '@/components/pizza/PizzaBasketCard'
 import CustomButton from '@/components/CustomButton'
+import { useCreateOrderMutation } from '@/services/orderService'
+import { IOrder, IOrderItem } from '@/interfaces/basket'
+import { getToken } from '@/redux/slices/userSlice'
+import { router } from 'expo-router'
 
 export default function BasketScreen() {
   const pizzas = useAppSelector(getBasketPizzas)
   const dispatch = useAppDispatch()
+
+  const handleCreateOrder = async () => {
+    router.push('/order')
+  }
 
   return (
     <SafeAreaView className="bg-primary flex-1 px-4">
@@ -38,7 +46,13 @@ export default function BasketScreen() {
             className="bg-red-600 min-h-0 py-1"
             textStyles="text-white"
           />
-          <CustomButton handlePress={() => {}} title="Оформити замовлення" className="bg-secondary" textStyles="text-white" />
+          <CustomButton
+            isDisabled={pizzas.length === 0}
+            handlePress={handleCreateOrder}
+            title="Перейти до оформлення"
+            className="bg-secondary"
+            textStyles="text-white"
+          />
         </View>
       </View>
 

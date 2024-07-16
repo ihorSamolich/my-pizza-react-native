@@ -31,7 +31,7 @@ const PizzaBasketCard: React.FC<PizzaBasketCardProps> = ({ pizza }) => {
             resizeMode="cover"></Image>
           <View className="flex-1">
             <Text className="font-bold text-lg">{`${pizza.pizza.name} ${pizza.size.sizeName} см`}</Text>
-            <Text className="text-green-600 text-lg">{pizza.size.price.toFixed()} ₴</Text>
+            <Text className="text-green-600 text-lg">{pizza.size.price.toFixed()} ₴ шт</Text>
             <View className="flex-row items-center mt-2">
               <TouchableOpacity
                 className="h-7 w-7 bg-gray-200 rounded-full flex items-center justify-center mr-2"

@@ -6,17 +6,19 @@ import { pizzaApi } from '@/services/pizzaService'
 import { accountApi } from '@/services/accountService'
 import userReducer from './slices/userSlice'
 import pizzaReducer from './slices/basketSlice'
+import { orderApi } from '@/services/orderService'
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     pizza: pizzaReducer,
+    [orderApi.reducerPath]: orderApi.reducer,
     [accountApi.reducerPath]: accountApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [pizzaApi.reducerPath]: pizzaApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(categoryApi.middleware, pizzaApi.middleware, accountApi.middleware),
+    getDefaultMiddleware().concat(categoryApi.middleware, pizzaApi.middleware, accountApi.middleware, orderApi.middleware),
 })
 
 setupListeners(store.dispatch)

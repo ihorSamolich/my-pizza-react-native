@@ -1,10 +1,9 @@
-import { Animated, View } from 'react-native'
+import { FlatList, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useGetAllCategoriesQuery } from '@/services/categoryService'
 import { StatusBar } from 'expo-status-bar'
 import { useGetPizzasByCategoryQuery } from '@/services/pizzaService'
 import PizzaCard from '@/components/pizza/PizzaCard'
-import FlatList = Animated.FlatList
 import CategoryButton from '@/components/category/CategoryButton'
 import { ICategory } from '@/interfaces/category'
 import EmptyState from '@/components/EmptyState'
@@ -15,10 +14,11 @@ import SearchInput from '@/components/SearchInput'
 
 export default function PizzasScreen() {
   const [indexActive, setIndexActive] = useState<number>(0)
+  const [searchText, setSearchText] = useState<string>('')
   const [categoriesWithAll, setCategoriesWithAll] = useState<ICategory[]>([])
 
   const { data: categories } = useGetAllCategoriesQuery()
-  const { data: pizzas } = useGetPizzasByCategoryQuery(indexActive)
+  const { data: pizzas } = useGetPizzasByCategoryQuery({ id: indexActive, name: '' }) // need to fix
 
   useEffect(() => {
     if (categories) {
@@ -30,7 +30,7 @@ export default function PizzasScreen() {
     <SafeAreaView className="bg-primary flex-1 px-4">
       <AppLogo />
 
-      <SearchInput />
+      <SearchInput query={searchText} setQuery={setSearchText} />
 
       {categories && (
         <View>

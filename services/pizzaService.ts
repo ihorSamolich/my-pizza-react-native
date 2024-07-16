@@ -19,9 +19,9 @@ export const pizzaApi = createApi({
       providesTags: (_result, _error, arg) => [{ type: 'Pizzas', id: arg }],
     }),
 
-    getPizzasByCategory: builder.query<IPagedDataResponse<IPizza>, number>({
-      query: (id) => {
-        return `getPage?categoryId=${id}`
+    getPizzasByCategory: builder.query<IPagedDataResponse<IPizza>, { id: number; name: string }>({
+      query: ({ id, name }) => {
+        return `getPage?${name ? `&name=${name}&` : ''}categoryId=${id}`
       },
       providesTags: ['Pizzas'],
     }),
