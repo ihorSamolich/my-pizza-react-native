@@ -22,3 +22,27 @@ export interface IOrder {
   isDelivery: boolean
   token: string | null
 }
+
+interface IOrderSizePrice {
+  id: number
+  sizeId: number
+  sizeName: string
+  price: number
+}
+
+export interface IUserOrderItem {
+  pizzaId: number
+  pizzaSizeId: number
+  quantity: number
+  pizza: IPizza
+  sizePrice: IOrderSizePrice
+}
+
+export interface IUserOrder {
+  id: number
+  totalAmount: number
+  deliveryAddress: string
+  isDelivery: boolean
+  dateCreated: string
+  orderItems: IUserOrderItem[]
+}

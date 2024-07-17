@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { createBaseQuery } from '@/utils/createBaseQuery'
-import { IOrder } from '@/interfaces/basket'
+import { IOrder, IUserOrder } from '@/interfaces/basket'
 
 export const orderApi = createApi({
   reducerPath: 'orderApi',
@@ -8,10 +8,10 @@ export const orderApi = createApi({
   tagTypes: ['Orders'],
 
   endpoints: (builder) => ({
-    // getAllOrders: builder.query<IOrder[], void>({
-    //   query: () => 'getAll',
-    //   providesTags: ['Orders'],
-    // }),
+    getAllOrders: builder.query<IUserOrder[], void>({
+      query: () => 'getAll',
+      providesTags: ['Orders'],
+    }),
 
     createOrder: builder.mutation<void, IOrder>({
       query: (data) => {
@@ -28,4 +28,4 @@ export const orderApi = createApi({
   }),
 })
 
-export const { useCreateOrderMutation } = orderApi
+export const { useCreateOrderMutation, useGetAllOrdersQuery } = orderApi

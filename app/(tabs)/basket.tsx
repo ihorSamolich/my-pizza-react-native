@@ -9,9 +9,6 @@ import { useAppDispatch, useAppSelector } from '@/redux/store'
 import { clearBasket, getBasketPizzas } from '@/redux/slices/basketSlice'
 import PizzaBasketCard from '@/components/pizza/PizzaBasketCard'
 import CustomButton from '@/components/CustomButton'
-import { useCreateOrderMutation } from '@/services/orderService'
-import { IOrder, IOrderItem } from '@/interfaces/basket'
-import { getToken } from '@/redux/slices/userSlice'
 import { router } from 'expo-router'
 
 export default function BasketScreen() {

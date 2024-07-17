@@ -45,7 +45,7 @@ const Welcome = () => {
             Flavors with <Text className="text-secondary-200">My Pizza</Text>
           </Text>
 
-          <CustomButton title="Continue with Email" handlePress={() => router.push('/sign-in')} containerStyles="w-full mt-7" />
+          <CustomButton title="Continue with Email" handlePress={() => router.replace('/sign-in')} containerStyles="w-full mt-7" />
         </View>
       </ScrollView>
 

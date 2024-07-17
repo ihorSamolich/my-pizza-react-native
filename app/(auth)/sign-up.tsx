@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as ImagePicker from 'expo-image-picker'
 
-import { Dimensions, Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Image, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import FormField from '@/components/FormField'
 
 import { useRegisterMutation } from '@/services/accountService'
@@ -10,6 +10,12 @@ import { Link, router } from 'expo-router'
 import CustomButton from '@/components/CustomButton'
 import { images } from '@/constants'
 import Ionicons from '@expo/vector-icons/Ionicons'
+import { saveToSecureStore } from '@/utils/secureStore'
+import { setCredentials } from '@/redux/slices/userSlice'
+import { jwtParse } from '@/utils/jwtParser'
+import { IUser } from '@/interfaces/account'
+import { useAppDispatch } from '@/redux/store'
+import CustomModal from '@/components/CustomModal'
 
 const SignUp = () => {
   const [firstName, setFirstName] = React.useState('')
@@ -18,7 +24,10 @@ const SignUp = () => {
   const [password, setPassword] = React.useState('')
   const [image, setImage] = useState<string | null>(null)
 
+  const [modalVisible, setModalVisible] = useState<boolean>(false)
+
   const [create, { isLoading }] = useRegisterMutation()
+  const dispatch = useAppDispatch()
 
   const pickImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync()
@@ -42,36 +51,31 @@ const SignUp = () => {
 
   const submit = async () => {
     try {
-      if (image) {
-        const file = await getFileFromUri(image)
+      const file = await getFileFromUri(image)
 
-        const res = await create({
-          firstName,
-          lastName,
-          email,
-          password,
-          // @ts-ignore
-          image: file,
-        }).unwrap()
-      }
+      const res = await create({
+        firstName,
+        lastName,
+        email,
+        password,
+        // @ts-ignore
+        image: file,
+      }).unwrap()
 
-      alert('Successful!')
+      await saveToSecureStore('authToken', res.token)
+      dispatch(setCredentials({ user: jwtParse(res.token) as IUser, token: res.token }))
       router.replace('/pizzas')
     } catch (error) {
-      console.log(error)
-
-      alert('Error')
+      setModalVisible(true)
     }
   }
 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="bg-primary flex-1 ">
       <ScrollView>
-        <View
-          className="w-full flex justify-center items-center h-full px-4 my-6"
-          style={{
-            minHeight: Dimensions.get('window').height - 100,
-          }}>
+        <View className="w-full h-full flex justify-center items-center px-4">
+          <CustomModal modalVisible={modalVisible} setModalVisible={setModalVisible} text="Помилка реєстрації!" onClose={() => {}} />
+
           <View className="flex flex-row items-center justify-center">
             <Image source={images.pizzaLogo} className=" w-[40px] h-[34px]" resizeMode="contain" />
             <Text className="mt-2 text-4xl font-pbold font-bold text-secondary">MYPIZZA</Text>
