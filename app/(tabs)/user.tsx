@@ -5,18 +5,23 @@ import { router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { removeFromSecureStore } from '@/utils/secureStore'
 import { useAppDispatch, useAppSelector } from '@/redux/store'
-import { getUser, logOut } from '@/redux/slices/userSlice'
+import { getToken, getUser, logOut } from '@/redux/slices/userSlice'
 import { BASE_URL } from '@/constants/Urls'
 import AppLogo from '@/components/AppLogo'
 import CustomButton from '@/components/CustomButton'
-import { useGetAllOrdersQuery } from '@/services/orderService'
+import { useGetPageOrdersQuery } from '@/services/orderService'
 import OrderCard from '@/components/order/OrderCard'
+import EmptyState from '@/components/EmptyState'
 
 export default function UserScreen() {
   const user = useAppSelector(getUser)
+  const token = useAppSelector(getToken)
+
   const dispatch = useAppDispatch()
 
-  const { data: orders } = useGetAllOrdersQuery()
+  //const { data: orders } = useGetAllOrdersQuery()
+
+  const { data } = useGetPageOrdersQuery(token || '')
 
   const logout = async () => {
     await removeFromSecureStore('authToken')
@@ -41,7 +46,12 @@ export default function UserScreen() {
 
         <InfoBox title="Мої замовлення" titleStyles="text-2xl text-secondary font-bold" />
 
-        <FlatList data={orders} keyExtractor={(order) => order.id.toString()} renderItem={({ item }) => <OrderCard order={item} />} />
+        <FlatList
+          data={data?.data}
+          keyExtractor={(order) => order.id.toString()}
+          renderItem={({ item }) => <OrderCard order={item} />}
+          ListEmptyComponent={() => <EmptyState title="Не знайдено" subtitle="Ви ще ніколи не замовляли піци!" />}
+        />
 
         <View className=" justify-end gap-y-2 bg-primary">
           <CustomButton handlePress={logout} title="Вийти" className="bg-red-600" textStyles="text-white" />

@@ -103,7 +103,7 @@ export default function OrderScreen() {
         </View>
 
         <View className="h-20 flex items-center justify-center">
-          <Text className="text-xl text-gray-100 font-pmedium">{`Загальна сума замовлення: ${totalPrice.toFixed()} $`}</Text>
+          <Text className="text-xl text-gray-100 font-pmedium">{`Загальна сума замовлення: ${totalPrice.toFixed()} ₴`}</Text>
         </View>
 
         <View className=" justify-end gap-y-2 bg-primary">
